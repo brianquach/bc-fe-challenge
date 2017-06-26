@@ -58,41 +58,103 @@ var companySearch = (function() {
 
   var $searchBox;
   var $searchResults;
+  var $pagination;
+  var $currentPage;
+  var $totalPage;
+  var $prevBtn;
+  var $nextBtn;
+  var q = '';
   var startIndex = 0;
+  var limit = 25;
   var total;
   var results = [];
 
   function init() {
     $searchBox = document.getElementById('searchBox');
     $searchResults = document.getElementById('searchResults');
+    $currentPage = document.getElementById('currentPage');
+    $totalPage = document.getElementById('totalPage');
+    $prevBtn = document.getElementById('prevBtn');
+    $nextBtn = document.getElementById('nextBtn');
+    $pagination = document.getElementById('pagination');
 
+    var getCompanyInfo = tools.debounce(companyAPI.getCompanyInformation, 1000);
+    var companyInfoCallBack = function(response) {
+      results = response.results;
+      total = response.total;
+      render();
+    }
     $searchBox.addEventListener('keyup', function(event) {
-      companyAPI.getCompanyInformation();
+      q = $searchBox.value;
+      var options = {
+        q: q,
+        start: startIndex,
+        limit: limit,
+        laborTypes: [],
+        callback: companyInfoCallBack
+      };
+      getCompanyInfo(options);
+    });
+
+    $prevBtn.addEventListener('click', function(event) {
+      startIndex -= limit;
+      companyAPI.getCompanyInformation({
+        q: q,
+        start: startIndex,
+        limit: limit,
+        laborTypes: [],
+        callback: companyInfoCallBack
+      });
+    });
+
+    $nextBtn.addEventListener('click', function(event) {
+      startIndex += limit;
+      companyAPI.getCompanyInformation({
+        q: q,
+        start: startIndex,
+        limit: limit,
+        laborTypes: [],
+        callback: companyInfoCallBack
+      });
     });
 
     companyAPI.getCompanyInformation({
       q: '',
-      start: 0,
-      limit: 25,
+      start: startIndex,
+      limit: limit,
       laborTypes: [],
-      callback: function(response) {
-        results = response.results;
-        total = response.total;
-        render();
-      }
+      callback: companyInfoCallBack
     });
   }
 
   function render() {
-    console.log('here render', startIndex, total, results);
+    // Render current list of companies
     var h = '';
     results.forEach(function(result) {
       h += '<li class="company-brief">';
       h += '<a href="javascript:void(0)"><span class="title">' + result.name + '</span></a>'
       h += '</li>';
     });
-
     $searchResults.innerHTML = h;
+
+    // Render serach pagination
+    var currentPage = startIndex / limit + 1;
+    var totalPages = total / limit;
+    $currentPage.innerText = currentPage;
+    $totalPage.innerText = totalPages;
+
+    if (currentPage > 1 && results.length > 0) {
+      $prevBtn.classList.remove('hide');
+    } else {
+      $prevBtn.classList.add('hide')
+    }
+    if (currentPage !== totalPages && results.length > 0) {
+      $nextBtn.classList.remove('hide');
+    } else {
+      $nextBtn.classList.add('hide');
+    }
+
+    $pagination.classList.add('show');
   }
 
   return {
