@@ -7,21 +7,22 @@
     <link rel="stylesheet" href="static/css/styles.css">
   </head>
   <body>
-    <header>
-      <h1>Company Search</h1>
+    <h1>Company Search</h1>
+
+    <header class="company-search">
+      <input id="searchBox" class="company-search__box" type="text" placeholder="Search companies...">
     </header>
 
     <main class="content">
-      <aside class="company-search">
-        <input id="searchBox" class="company-search__box" type="text" placeholder="Search companies...">
+      <section class="company-list">
         <nav id="pagination" class="pagination">
           <button id="prevBtn" class="pagination__btn">&larr; Previous</button>
           Page <span id="currentPage"></span> of <span id="totalPage"></span>
           <button id="nextBtn" class="pagination__btn">Next &rarr;</button>
         </nav>
-        <ul id="searchResults" class="compnay-search__results">
+        <ul id="searchResults">
         </ul>
-      </aside>
+      </section>
       <article id="companyInformation" class="company-information">
         <div class="no-company-select">Select Company</div>
       </article>

@@ -21,19 +21,25 @@ ul {
 /* Layout */
 .content {
   display: flex;
+  margin-top: 2rem;
 }
 
 .company-search {
-  width: 25%;
+  width: 100%;
+}
+
+.company-list {
+  flex-grow: 1;
+  max-width: 300px;
 }
 
 .company-information {
-  width: 75%;
   padding: 1rem;
   background-color: #ffffff;
   border: 1px solid #cccccc;
   margin-left: 2rem;
   box-shadow: 1px 1px 3px 0 #cccccc;
+  flex-grow: 3;
 }
 
 /* Company Information */
@@ -91,6 +97,7 @@ ul {
 .pagination__btn {
   padding: 1rem;
   margin: 0 .5rem;
+  cursor: pointer;
 }
 
 /* utility */
