@@ -146,6 +146,9 @@ var companySearch = (function() {
     });
   }
 
+  /*
+   *  companyRender - render companies information
+   */
   function companyRender(name, avatarURL, phone, website, laborTypes) {
     var h = '';
 
@@ -158,6 +161,9 @@ var companySearch = (function() {
     $companyInformation.innerHTML = h;
   }
 
+  /*
+   *  searchRender - render companies returned by search
+   */
   function searchRender() {
     // Render current list of companies
     var h = '';
