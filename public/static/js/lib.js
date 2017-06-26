@@ -37,7 +37,26 @@ var tools = (function() {
     httpRequest.send();
   }
 
+  /*
+   *  debounce - Provides simple debounce functionality
+   *  func {object} - function to add debounce to
+   *  wait {integer} - milliseconds to wait
+   */
+  function debounce(func, wait) {
+    var timeout;
+
+    return function () {
+      var args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        timeout = null;
+        func(args);
+      }, wait);
+    };
+  }
+
   return {
-    ajaxCall: ajaxCall
+    ajaxCall: ajaxCall,
+    debounce: debounce
   };
 })();
