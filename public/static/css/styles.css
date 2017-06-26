@@ -29,10 +29,16 @@ ul {
 
 .company-information {
   width: 75%;
+  padding: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  margin-left: 2rem;
+  box-shadow: 1px 1px 3px 0 #cccccc;
 }
 
 /* Company Information */
-.comppany-information {
+.company-information img {
+  max-height: 100px;
 }
 
 .no-company-select {
@@ -79,6 +85,12 @@ ul {
 /* Pagination */
 .pagination {
   display: none;
+  margin: 1rem 0;
+}
+
+.pagination__btn {
+  padding: 1rem;
+  margin: 0 .5rem;
 }
 
 /* utility */

@@ -88,6 +88,8 @@ var companySearch = (function() {
     };
     $searchBox.addEventListener('keyup', function(event) {
       q = $searchBox.value;
+      q = q.trim();
+
       startIndex = 0;
       var options = {
         q: q,
@@ -147,11 +149,11 @@ var companySearch = (function() {
   function companyRender(name, avatarURL, phone, website, laborTypes) {
     var h = '';
 
-    h += '<h2>' + name + '</h2>';
     h += '<img src="' + avatarURL + '">';
-    h += '<span class="phone">' + phone + '</span>';
-    h += '<a href="' + website + '">website</a>';
-    h += '<span class="laborTypes">' + laborTypes + '</span>';
+    h += '<h2>' + name + '</h2>';
+    h += 'Phone: <span class="phone">' + phone + '</span><br>';
+    h += 'Website: <a href="' + website + '">' + website + '</a><br>';
+    h += 'Labor Types: <span class="laborTypes">' + laborTypes + '</span><br>';
 
     $companyInformation.innerHTML = h;
   }
