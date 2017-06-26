@@ -46,11 +46,13 @@ var tools = (function() {
     var timeout;
 
     return function () {
+      var context = this;
       var args = arguments;
+
       clearTimeout(timeout);
       timeout = setTimeout(function() {
         timeout = null;
-        func(args);
+        func.apply(context, args);
       }, wait);
     };
   }
