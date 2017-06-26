@@ -83,9 +83,10 @@ var companySearch = (function() {
       results = response.results;
       total = response.total;
       render();
-    }
+    };
     $searchBox.addEventListener('keyup', function(event) {
       q = $searchBox.value;
+      startIndex = 0;
       var options = {
         q: q,
         start: startIndex,
@@ -138,23 +139,27 @@ var companySearch = (function() {
     $searchResults.innerHTML = h;
 
     // Render serach pagination
-    var currentPage = startIndex / limit + 1;
-    var totalPages = total / limit;
+    var currentPage = Math.floor(startIndex / limit) + 1;
+    var totalPages = Math.ceil(total / limit);
     $currentPage.innerText = currentPage;
     $totalPage.innerText = totalPages;
 
-    if (currentPage > 1 && results.length > 0) {
+    if (currentPage > 1) {
       $prevBtn.classList.remove('hide');
     } else {
       $prevBtn.classList.add('hide')
     }
-    if (currentPage !== totalPages && results.length > 0) {
+    if (currentPage !== totalPages) {
       $nextBtn.classList.remove('hide');
     } else {
       $nextBtn.classList.add('hide');
     }
 
-    $pagination.classList.add('show');
+    if (results.length > 0) {
+      $pagination.classList.add('show');
+    } else {
+      $pagination.classList.remove('show');
+    }
   }
 
   return {
