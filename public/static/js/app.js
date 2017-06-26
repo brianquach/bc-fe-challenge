@@ -63,6 +63,7 @@ var companySearch = (function() {
   var $totalPage;
   var $prevBtn;
   var $nextBtn;
+  var $companyInformation;
   var q = '';
   var startIndex = 0;
   var limit = 25;
@@ -77,12 +78,13 @@ var companySearch = (function() {
     $prevBtn = document.getElementById('prevBtn');
     $nextBtn = document.getElementById('nextBtn');
     $pagination = document.getElementById('pagination');
+    $companyInformation = document.getElementById('companyInformation');
 
     var getCompanyInfo = tools.debounce(companyAPI.getCompanyInformation, 1000);
     var companyInfoCallBack = function(response) {
       results = response.results;
       total = response.total;
-      render();
+      searchRender();
     };
     $searchBox.addEventListener('keyup', function(event) {
       q = $searchBox.value;
@@ -119,6 +121,20 @@ var companySearch = (function() {
       });
     });
 
+    // Use event delegation to handle company selection
+    $searchResults.addEventListener('click', function(event) {
+      var element = event.srcElement || event.target;
+      if (element.classList.contains('company-title')) {
+        companyRender(
+          element.dataset.name,
+          element.dataset.avatarurl,
+          element.dataset.phone,
+          element.dataset.website,
+          element.dataset.labortypes
+        );
+      }
+    });
+
     companyAPI.getCompanyInformation({
       q: '',
       start: startIndex,
@@ -128,13 +144,30 @@ var companySearch = (function() {
     });
   }
 
-  function render() {
+  function companyRender(name, avatarURL, phone, website, laborTypes) {
+    var h = '';
+
+    h += '<h2>' + name + '</h2>';
+    h += '<img src="' + avatarURL + '">';
+    h += '<span class="phone">' + phone + '</span>';
+    h += '<a href="' + website + '">website</a>';
+    h += '<span class="laborTypes">' + laborTypes + '</span>';
+
+    $companyInformation.innerHTML = h;
+  }
+
+  function searchRender() {
     // Render current list of companies
     var h = '';
     results.forEach(function(result) {
       h += '<li class="company-brief">';
-      h += '<a href="javascript:void(0)"><span class="title">' + result.name + '</span></a>'
-      h += '</li>';
+      h += '<a class="company-title" href="javascript:void(0)"';
+      h += 'data-avatarurl="' + result.avatarUrl + '"';
+      h += 'data-name="' + result.name + '"';
+      h += 'data-phone="' + result.phone + '"';
+      h += 'data-website="' + result.website + '"';
+      h += 'data-labortypes="' + result.laborType.join(', ') + '"';
+      h += '>' + result.name + '</a></li>';
     });
     $searchResults.innerHTML = h;
 
