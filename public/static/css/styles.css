@@ -6,6 +6,7 @@ html {
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
+  background: #fafafa;
 }
 
 ul {
@@ -13,9 +14,66 @@ ul {
   list-style: none;
 }
 
-/* Company Search List */
-.company-brief {
+* {
+  box-sizing: border-box;
+}
 
+/* Layout */
+.content {
+  display: flex;
+}
+
+.company-search {
+  width: 25%;
+}
+
+.company-information {
+  width: 75%;
+}
+
+/* Company Information */
+.comppany-information {
+}
+
+.no-company-select {
+  color: #aaaaaa;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 5rem;
+  text-align: center;
+}
+
+/* Company Search List */
+.company-search__box {
+  width: 100%;
+  font-size: 1.8rem;
+  padding: .8rem;
+}
+
+.company-brief {
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  margin: 1rem 0;
+  box-shadow: 1px 1px 3px 0 #cccccc;
+  background-color: #ffffff;
+  transition: transform .2s ease;
+}
+
+.company-brief a {
+  padding: .5rem;
+  text-decoration: none;
+  color: #000000;
+  display: block;
+}
+
+.company-brief a:hover {
+  background-color: #2cd681;
+  color: #ffffff;
+}
+
+.company-brief:hover {
+  transform: translateY(-.5rem);
+  box-shadow: 3px 3px 6px 0 #cccccc;
 }
 
 /* Pagination */
