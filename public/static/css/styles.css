@@ -40,7 +40,7 @@ header {
 }
 
 .company-list {
-  flex-grow: 1;
+  width: 25%;
   max-width: 300px;
 }
 
@@ -50,7 +50,7 @@ header {
   border: 1px solid #cccccc;
   margin-left: 2rem;
   box-shadow: 1px 1px 3px 0 #cccccc;
-  flex-grow: 3;
+  width: 75%;
 }
 
 .site-footer {
@@ -67,6 +67,7 @@ header {
 
 /* Company Information */
 .company-information img {
+  max-width: 100%;
   max-height: 100px;
 }
 
@@ -115,6 +116,7 @@ header {
 .pagination {
   display: none;
   margin: 1rem 0;
+  text-align: center;
 }
 
 .pagination__btn {
@@ -130,4 +132,22 @@ header {
 
 .hide {
   display: none;
+}
+
+@media (max-width: 500px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .company-list {
+    width: 100%;
+    max-width: 100%;
+    order: 2;
+  }
+
+  .company-information {
+    width: 100%;
+    margin: 0;
+    order: 1;
+  }
 }
