@@ -61,15 +61,8 @@ header {
 }
 
 .site-footer {
-  background-color: #35262D;
-  color: #ffffff;
   margin-top: 2rem;
   padding: .5rem;
-}
-
-.site-footer a {
-  color: #ffffff;
-  text-decoration: none;
 }
 
 /* Company Information */
@@ -162,7 +155,7 @@ header {
 
   .company-information {
     width: 100%;
-    margin: 0;
+    margin: 0 0 2rem 0;
     order: 1;
   }
 }

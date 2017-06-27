@@ -64,9 +64,12 @@ var companySearch = (function() {
   var $prevBtn;
   var $nextBtn;
   var $companyInformation;
+  var $unionCheck;
+  var $nonUnionCheck;
+  var $prevailingCheck;
   var q = '';
   var startIndex = 0;
-  var limit = 25;
+  var limit = 15;
   var total;
   var results = [];
 
@@ -78,6 +81,9 @@ var companySearch = (function() {
     $prevBtn = document.getElementById('prevBtn');
     $nextBtn = document.getElementById('nextBtn');
     $pagination = document.getElementById('pagination');
+    $unionCheck = document.getElementById('unionCheck');
+    $nonUnionCheck = document.getElementById('nonUnionCheck');
+    $prevailingCheck = document.getElementById('prevailingCheck');
     $companyInformation = document.getElementById('companyInformation');
 
     var getCompanyInfo = tools.debounce(companyAPI.getCompanyInformation, 1000);
@@ -95,7 +101,7 @@ var companySearch = (function() {
         q: q,
         start: startIndex,
         limit: limit,
-        laborTypes: [],
+        laborTypes: getLaborFilter(),
         callback: companyInfoCallBack
       };
       getCompanyInfo(options);
@@ -107,7 +113,7 @@ var companySearch = (function() {
         q: q,
         start: startIndex,
         limit: limit,
-        laborTypes: [],
+        laborTypes: getLaborFilter(),
         callback: companyInfoCallBack
       });
     });
@@ -118,7 +124,7 @@ var companySearch = (function() {
         q: q,
         start: startIndex,
         limit: limit,
-        laborTypes: [],
+        laborTypes: getLaborFilter(),
         callback: companyInfoCallBack
       });
     });
@@ -137,13 +143,41 @@ var companySearch = (function() {
       }
     });
 
+    var laborFilterCheckBoxes = [$unionCheck, $nonUnionCheck, $prevailingCheck];
+    laborFilterCheckBoxes.forEach(function(checkbox) {
+      checkbox.addEventListener('click', function() {
+        companyAPI.getCompanyInformation({
+          q: q,
+          start: startIndex,
+          limit: limit,
+          laborTypes: getLaborFilter(),
+          callback: companyInfoCallBack
+        });
+      });
+    });
+
     companyAPI.getCompanyInformation({
       q: '',
       start: startIndex,
       limit: limit,
-      laborTypes: [],
+      laborTypes: getLaborFilter(),
       callback: companyInfoCallBack
     });
+  }
+
+  // Format LaborType filter
+  function getLaborFilter() {
+    var filter = [];
+    if ($unionCheck.checked) {
+      filter.push('Union');
+    }
+    if ($nonUnionCheck.checked) {
+      filter.push('Non-Union');
+    }
+    if ($prevailingCheck.checked) {
+      filter.push('Prevailing Wages');
+    }
+    return filter;
   }
 
   /*
