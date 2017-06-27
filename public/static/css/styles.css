@@ -145,19 +145,10 @@ header {
   color: #ffffff;
 }
 
-/* utility */
-.show {
-  display: block;
-}
-
-.hide {
-  display: none;
-}
-
 @media (max-width: 1145px) {
-    .pagination__btn {
-      display: block;
-    }
+  .pagination__btn {
+    display: block;
+  }
 }
 
 @media (max-width: 600px) {
@@ -176,4 +167,13 @@ header {
     margin: 0 0 2rem 0;
     order: 1;
   }
+}
+
+/* utility */
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }
