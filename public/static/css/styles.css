@@ -31,12 +31,19 @@ header {
 /* Layout */
 .content {
   display: flex;
-  margin-top: 2rem;
   padding: 1rem;
 }
 
 .company-search {
   width: 100%;
+}
+
+.company-search__labor-filter {
+  margin: 1rem 0 0 0;
+}
+
+.company-search__labor-filter label {
+  padding: 1.6rem 1.6rem 1.6rem 0;
 }
 
 .company-list {
@@ -80,6 +87,10 @@ header {
 }
 
 /* Company Search List */
+.company-list ul {
+  margin: 0;
+}
+
 .company-search__box {
   width: 100%;
   font-size: 1.8rem;
@@ -93,6 +104,10 @@ header {
   box-shadow: 1px 1px 3px 0 #cccccc;
   background-color: #ffffff;
   transition: transform .2s ease;
+}
+
+.company-brief:first-child {
+  margin-top: 0;
 }
 
 .company-brief a {

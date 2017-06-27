@@ -10,17 +10,23 @@
     <header class="company-search">
       <h1>Company Search</h1>
       <input id="searchBox" class="company-search__box" type="text" placeholder="Search companies...">
+      <div class="company-search__labor-filter">
+        Filter By:
+        <input id="unionCheck" type="checkbox" value="Union"> <label for="unionCheck">Union</label>
+        <input id="nonUnionCheck" type="checkbox" value="Non-Union"> <label for="nonUnionCheck">Non-Union</label>
+        <input id="prevailingCheck" type="checkbox" value="Prevailing Wages"> <label for="prevailingCheck">Prevailing Wages</label>
+      </div>
     </header>
 
     <main class="content">
       <section class="company-list">
+        <ul id="searchResults">
+        </ul>
         <nav id="pagination" class="pagination">
           <button id="prevBtn" class="pagination__btn">&larr; Previous</button>
           Page <span id="currentPage"></span> of <span id="totalPage"></span>
           <button id="nextBtn" class="pagination__btn">Next &rarr;</button>
         </nav>
-        <ul id="searchResults">
-        </ul>
       </section>
       <article id="companyInformation" class="company-information">
         <div class="no-company-select">Select Company</div>
