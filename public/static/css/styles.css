@@ -137,9 +137,12 @@ header {
 }
 
 .pagination__btn {
-  padding: 1rem;
+  padding: .5rem;
   margin: 0 .5rem;
-  cursor: pointer;
+  background-color: #2cd681;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #ffffff;
 }
 
 /* utility */
@@ -149,6 +152,12 @@ header {
 
 .hide {
   display: none;
+}
+
+@media (max-width: 1145px) {
+    .pagination__btn {
+      display: block;
+    }
 }
 
 @media (max-width: 600px) {
