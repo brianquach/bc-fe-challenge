@@ -67,6 +67,7 @@ var companySearch = (function() {
   var $unionCheck;
   var $nonUnionCheck;
   var $prevailingCheck;
+  var $noResults;
   var q = '';
   var startIndex = 0;
   var limit = 15;
@@ -84,6 +85,7 @@ var companySearch = (function() {
     $unionCheck = document.getElementById('unionCheck');
     $nonUnionCheck = document.getElementById('nonUnionCheck');
     $prevailingCheck = document.getElementById('prevailingCheck');
+    $noResults = document.getElementById('noResults');
     $companyInformation = document.getElementById('companyInformation');
 
     var getCompanyInfo = tools.debounce(companyAPI.getCompanyInformation, 1000);
@@ -232,7 +234,9 @@ var companySearch = (function() {
 
     if (results.length > 0) {
       $pagination.classList.add('show');
+      $noResults.classList.remove('show');
     } else {
+      $noResults.classList.add('show');
       $pagination.classList.remove('show');
     }
   }
